@@ -4,8 +4,6 @@ Salatify is an open-source initiative dedicated to providing a comprehensive col
 
 ## Authors
 
-just me [@MohamedLifa](https://www.github.com/mohamed-lifa7)
-
 ## Tech Stack
 
 **Framework**: Next.js
@@ -23,19 +21,20 @@ just me [@MohamedLifa](https://www.github.com/mohamed-lifa7)
 - [ ] Develop a Quran integration feature, allowing users to explore verses, translations, and interpretations within Salatify.
 
 - [ ] Create a Zikr companion feature to guide users in remembrance and spiritual reflection.
+
 ## Environment Variables
 
 To run this project, you will need to add the following environment variables to your .env file
 
 `API_KEY_HADITHS`
- you can obtain it from [here](https://hadithapi.com/)
+you can obtain it from [here](https://hadithapi.com/)
 
 ## Run Locally
 
 Clone the project
 
 ```bash
-  git clone https://github.com/Mohamed-lifa7/salatify.git
+  git clone https://github.com/MdHamidUddin/salaatify.git
 ```
 
 Go to the project directory
@@ -55,8 +54,6 @@ Start the development server
 ```bash
   pnpm dev
 ```
-
-
 
 ## License
 
