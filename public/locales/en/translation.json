@@ -10,7 +10,8 @@
     "qibla":"Qibla",
     "sunnah":"Sunnah",
     "hadith":"Hadith",
-    "about":"About"
+    "about":"About",
+    "team":"Team Members"
   },
   "allahNames": {
     "title": "99 Names of Allah",
@@ -32,5 +33,6 @@
   },
   "search":"search",
    "nextPrayer": "{{prayerName}} is next",
-   "prayerTimesHeader":"Prayer Times for {{city}}"
+   "prayerTimesHeader":"Prayer Times for {{city}}",
+   "teamPage.description": "Our team members manage and operate the Islamic Foundation, helping us achieve our goals. Their diverse skills and experiences help drive our mission forward."
 }

@@ -21,6 +21,7 @@ export function MainNav() {
     { href: "/allah-names", translationKey: "navigation.names" },
     // { href: "/qibla", translationKey: "navigation.qibla" },
     { href: "/sunnah", translationKey: "navigation.sunnah" },
+    { href: "/team", translationKey: "navigation.team" },
   ];
 
   return (
