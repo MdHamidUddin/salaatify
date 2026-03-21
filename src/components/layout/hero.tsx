@@ -1,26 +1,9 @@
 "use client";
 import { useTranslation } from "react-i18next";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import React, { useState, type FormEvent, type ChangeEvent } from "react";
+import React from "react";
 
-interface HeroProps {
-  setSearchText: (text: string) => void;
-  setClicked: (clicked: boolean) => void;
-}
-
-export const Hero = ({ setSearchText, setClicked }: HeroProps) => {
+export const Hero = () => {
   const { t, i18n } = useTranslation();
-  const [inputValue, setInputValue] = useState("");
-
-  const handleSearchSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setSearchText(inputValue);
-  };
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
 
   return (
     <div className="flex flex-col items-center justify-center pt-0 md:container sm:max-w-xl md:max-w-full lg:pt-16">
@@ -28,7 +11,7 @@ export const Hero = ({ setSearchText, setClicked }: HeroProps) => {
         <div className="mb-10 max-w-xl sm:text-center md:mx-auto md:mb-12 lg:max-w-2xl">
           <h2
             dir={i18n.language === "bn" ? "ltr" : "ltr"}
-            className="mb-6 max-w-lg text-3xl font-bold leading-none tracking-tight sm:text-4xl md:mx-auto"
+            className="mb-6 max-w-lg text-2xl font-bold leading-none tracking-tight sm:text-4xl md:mx-auto"
           >
             {t("home.title")}
           </h2>
@@ -41,7 +24,7 @@ export const Hero = ({ setSearchText, setClicked }: HeroProps) => {
           </p>
         </div>
 
-        <form
+        {/* <form
           onSubmit={handleSearchSubmit}
           className="mb-4 flex w-full items-center space-x-4"
         >
@@ -55,14 +38,14 @@ export const Hero = ({ setSearchText, setClicked }: HeroProps) => {
           <Button type="submit" onClick={() => setClicked(true)}>
             {t("search")}
           </Button>
-        </form>
+        </form> */}
 
-        <p
+        {/* <p
           dir={i18n.language === "bn" ? "ltr" : "ltr"}
           className="mb-10 max-w-md text-xs text-muted-foreground sm:text-sm md:text-center"
         >
           {t("home.subsubtitle")}
-        </p>
+        </p> */}
       </div>
     </div>
   );

@@ -14,28 +14,19 @@ import { useTranslation } from "react-i18next";
 
 interface PrayerSettingsProps {
   onMadhabChange: (madhab: "Shafi" | "Hanafi") => void;
-  onMethodChange: (method: number) => void;
+  onMethodChange: (_method: number) => void;
   currentMadhab: "Shafi" | "Hanafi";
   currentMethod: number;
 }
 
 export const PrayerSettings = ({
   onMadhabChange,
-  onMethodChange,
+  onMethodChange: _onMethodChange,
   currentMadhab,
-  currentMethod,
+  currentMethod: _currentMethod,
 }: PrayerSettingsProps) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
-
-  const calculationMethods = [
-    { id: 2, name: "ISNA (North America)" },
-    { id: 1, name: "University of Islamic Sciences, Karachi" },
-    { id: 3, name: "Muslim World League (MWL)" },
-    { id: 4, name: "Umm Al-Qura University, Makkah" },
-    { id: 5, name: "Egyptian General Authority" },
-    { id: 13, name: "Diyanet İşleri Başkanlığı, Turkey" },
-  ];
 
   return (
     <Card className="mb-4">
@@ -65,7 +56,7 @@ export const PrayerSettings = ({
             </Select>
           </div>
 
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <Label htmlFor="method">
               {t("prayerSettings.calculationMethod")}
             </Label>
@@ -84,7 +75,7 @@ export const PrayerSettings = ({
                 ))}
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
         </CardContent>
       )}
     </Card>

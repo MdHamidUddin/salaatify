@@ -7,25 +7,26 @@ import { ChevronLeft, ChevronRight } from "lucide-react"; // Using lucide-react 
 // Updated images array with captions
 const images = [
   {
-    src: "./cover/1.jpeg",
-    caption: "A serene mosque at dawn, bathed in soft light.",
+    src: "/cover/masjid.jpeg",
+    caption: "An-Nur Jame Masjid",
+    captionBn: "আন-নূর জামে মসজিদ",
   },
   {
-    src: "./cover/2.jpeg",
+    src: "/cover/2.jpeg",
     caption: "Intricate Islamic calligraphy, a timeless art form.",
   },
-  {
-    src: "./cover/3.jpeg",
-    caption: "Pilgrims performing Tawaf around the Holy Kaaba.",
-  },
-  {
-    src: "./cover/4.jpeg",
-    caption: "Stunning Islamic architecture, a blend of history and beauty.",
-  },
-  {
-    src: "./cover/5.jpeg",
-    caption: "A peaceful prayer rug, inviting tranquility and reflection.",
-  },
+  // {
+  //   src: "/cover/3.jpeg",
+  //   caption: "Pilgrims performing Tawaf around the Holy Kaaba.",
+  // },
+  // {
+  //   src: "/cover/4.jpeg",
+  //   caption: "Stunning Islamic architecture, a blend of history and beauty.",
+  // },
+  // {
+  //   src: "/cover/5.jpeg",
+  //   caption: "A peaceful prayer rug, inviting tranquility and reflection.",
+  // },
 ];
 
 const Carousel = () => {

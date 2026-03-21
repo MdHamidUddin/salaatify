@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Loader, MapPin, ExternalLink } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 interface PrayerMapProps {
@@ -18,19 +19,21 @@ export const PrayerMap = ({
   locationName,
   zoom = 13,
 }: PrayerMapProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const mapContainer = useRef<HTMLDivElement>(null);
   const [mapLoaded, setMapLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const isBangla = i18n.language === "bn";
+
+  // Generate Google Maps URL
+  const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+  const googleMapsDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
 
   useEffect(() => {
     const loadMap = async () => {
       try {
         // Dynamically import Leaflet (only on client side)
         const L = await import("leaflet");
-
-        // Dynamically import CSS (only on client side)
-        // await import('leaflet/dist/leaflet.css');
 
         // Fix Leaflet icon issue in Next.js
         delete (
@@ -75,6 +78,10 @@ export const PrayerMap = ({
                 <small>Lat: ${latitude.toFixed(4)}<br/>Lng: ${longitude.toFixed(
                   4,
                 )}</small>
+                <br/>
+                <a href="${googleMapsUrl}" target="_blank" rel="noopener noreferrer" style="color: #3b82f6; text-decoration: underline;">
+                  ${isBangla ? "গুগল ম্যাপে দেখুন" : "View on Google Maps"}
+                </a>
               </div>
             `);
 
@@ -100,7 +107,16 @@ export const PrayerMap = ({
     if (typeof window !== "undefined") {
       void loadMap();
     }
-  }, [latitude, longitude, locationName, zoom, mapLoaded, t]);
+  }, [
+    latitude,
+    longitude,
+    locationName,
+    zoom,
+    mapLoaded,
+    t,
+    isBangla,
+    googleMapsUrl,
+  ]);
 
   if (error) {
     return (
@@ -119,8 +135,31 @@ export const PrayerMap = ({
 
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle>{t("map.title")}</CardTitle>
+        <div className="flex gap-2">
+          {/* View on Google Maps Button */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={() => window.open(googleMapsUrl, "_blank")}
+          >
+            <MapPin className="h-4 w-4" />
+            {isBangla ? "গুগল ম্যাপে দেখুন" : "Google Maps"}
+          </Button>
+
+          {/* Get Directions Button */}
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-2"
+            onClick={() => window.open(googleMapsDirectionsUrl, "_blank")}
+          >
+            <ExternalLink className="h-4 w-4" />
+            {isBangla ? "দিকনির্দেশনা" : "Directions"}
+          </Button>
+        </div>
       </CardHeader>
       <CardContent>
         <div
@@ -134,10 +173,46 @@ export const PrayerMap = ({
             </div>
           )}
         </div>
-        <p className="mt-2 text-center text-sm text-gray-500">
-          📍 {t("map.location")}: {latitude.toFixed(4)}°, {longitude.toFixed(4)}
-          °
-        </p>
+
+        {/* Location Info with Google Maps Link */}
+        <div className="mt-4 flex items-center justify-between">
+          <p className="text-sm text-gray-500">
+            📍 {t("map.location")}: {latitude.toFixed(4)}°,{" "}
+            {longitude.toFixed(4)}°
+          </p>
+          <a
+            href={googleMapsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-sm text-blue-600 transition-colors hover:text-blue-800 hover:underline"
+          >
+            <MapPin className="h-3 w-3" />
+            {isBangla ? "বড় মানচিত্রে দেখুন" : "View Larger Map"}
+            <ExternalLink className="h-3 w-3" />
+          </a>
+        </div>
+
+        {/* Address Info */}
+        {(locationName ?? (latitude && longitude)) && (
+          <div className="mt-3 rounded-lg bg-blue-50 p-3">
+            <p className="text-sm text-gray-700">
+              <span className="font-semibold">
+                {isBangla ? "ঠিকানা:" : "Address:"}
+              </span>{" "}
+              {locationName ?? t("map.prayerLocation")}
+              {latitude &&
+                longitude &&
+                ` (${latitude.toFixed(4)}°, ${longitude.toFixed(4)}°)`}
+            </p>
+            <Button
+              variant="link"
+              className="mt-2 h-auto p-0 text-sm text-blue-600"
+              onClick={() => window.open(googleMapsDirectionsUrl, "_blank")}
+            >
+              {isBangla ? "দিকনির্দেশনা পান" : "Get Directions"} →
+            </Button>
+          </div>
+        )}
       </CardContent>
     </Card>
   );

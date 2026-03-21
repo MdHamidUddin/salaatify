@@ -13,13 +13,11 @@ import { useTranslation } from "react-i18next";
 import { useLocation } from "@/hooks/use-location";
 
 interface PrayersSectionProps {
-  searchText: string;
   clicked: boolean;
   setClicked: (clicked: boolean) => void;
 }
 
 export default function PrayersSection({
-  searchText,
   clicked,
   setClicked,
 }: PrayersSectionProps) {
@@ -246,7 +244,7 @@ export default function PrayersSection({
   ];
 
   const payload = {
-    city: location.city || searchText || "Rajshahi",
+    city: location.city || "Rajshahi",
     country: location.country || "Bangladesh",
     timezone: data.meta.timezone || "Asia/Dhaka",
     latitude: location.latitude,
@@ -282,7 +280,7 @@ export default function PrayersSection({
         <PrayerMap
           latitude={location.latitude}
           longitude={location.longitude}
-          locationName={location.city || searchText || "Current Location"}
+          locationName={location.city || "Current Location"}
           zoom={13}
         />
       </section>

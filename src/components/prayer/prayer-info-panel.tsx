@@ -24,7 +24,10 @@ const PrayerInfoPanel = ({
       <CardHeader className="flex items-center justify-between md:flex-row">
         <CardTitle className="capitalize">
           {t("prayerTimesHeader", { city: geolocation.city })}
-        </CardTitle>
+        </CardTitle>{" "}
+        <div className="my-8 grid place-content-center">
+          <CurrentTime />
+        </div>
         <CardDescription>{timings.date.readable}</CardDescription>
       </CardHeader>
       <Separator />
@@ -91,9 +94,9 @@ const PrayerInfoPanel = ({
           </div>
         )}
 
-        <div className="my-8 grid place-content-center">
+        {/* <div className="my-8 grid place-content-center">
           <CurrentTime />
-        </div>
+        </div> */}
       </CardContent>
     </Card>
   );

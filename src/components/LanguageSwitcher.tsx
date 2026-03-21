@@ -7,7 +7,7 @@ type LanguageStore = {
 };
 
 export default function LanguageSwitcher() {
-  const { i18n } = useTranslation(); // Access i18n to change language
+  const { i18n } = useTranslation("bn"); // Access i18n to change language
   const { setLanguage } = useLanguageStore() as LanguageStore; // From Zustand
 
   // const handleLanguageToggle = () => {

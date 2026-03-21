@@ -1,50 +1,73 @@
 "use client";
 
 import * as React from "react";
-import { useRouter } from "next/navigation";
-import { ViewVerticalIcon } from "@radix-ui/react-icons";
-import { useTranslation } from "react-i18next";
-
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import { Icons } from "@/components/icons";
+import { useTranslation } from "react-i18next";
+import {
+  Menu,
+  Home,
+  Users,
+  BookOpen,
+  School,
+  Video,
+  Compass,
+  MessageCircle,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Separator } from "../ui/separator";
 
 interface NavItem {
   href: string;
   translationKey: string;
-  category?: string;
+  icon: React.ReactNode;
 }
 
 export function MobileNav() {
   const [open, setOpen] = React.useState(false);
+  const pathname = usePathname();
   const { t, i18n } = useTranslation();
-  const router = useRouter();
-
-  const mainNavItems: NavItem[] = [
-    // { href: "/prayers", translationKey: "navigation.prayerTimes" },
-    { href: "/allah-names", translationKey: "navigation.names" },
-    // { href: "/qibla", translationKey: "navigation.qibla" },
-    { href: "/sunnah", translationKey: "navigation.sunnah" },
-  ];
-
-  const sunnahNavItems: NavItem[] = [
+  const isBangla = i18n.language === "bn";
+  const whatsappLink =
+    "https://chat.whatsapp.com/HpC3jHJNAFZIUNCcEiTK1F?mode=gi_t";
+  const navItems: NavItem[] = [
     {
-      href: "/sunnah/sahih-bukhari",
-      translationKey: "navigation.sahihBukhari",
+      href: "/",
+      translationKey: "navigation.home",
+      icon: <Home className="h-5 w-5" />,
     },
-    { href: "/sunnah/sahih-muslim", translationKey: "navigation.sahihMuslim" },
-    { href: "/sunnah/sunan-nasai", translationKey: "navigation.sunanNasai" },
-    { href: "/sunnah/abu-dawood", translationKey: "navigation.abuDawood" },
-    { href: "/sunnah/al-tirmidhi", translationKey: "navigation.tirmidhi" },
-    { href: "/sunnah/ibn-e-majah", translationKey: "navigation.ibnMajah" },
-    { href: "/sunnah/musnad-ahmad", translationKey: "navigation.musnadAhmad" },
+    {
+      href: "/allah-names",
+      translationKey: "navigation.names",
+      icon: <Compass className="h-5 w-5" />,
+    },
+    {
+      href: "/team",
+      translationKey: "navigation.team",
+      icon: <Users className="h-5 w-5" />,
+    },
+    {
+      href: "/courses",
+      translationKey: "navigation.courses",
+      icon: <BookOpen className="h-5 w-5" />,
+    },
+    {
+      href: "/teachers",
+      translationKey: "navigation.teachers",
+      icon: <School className="h-5 w-5" />,
+    },
+    {
+      href: "/videos",
+      translationKey: "navigation.videos",
+      icon: <Video className="h-5 w-5" />,
+    },
   ];
 
-  const handleNavigation = (href: string) => {
-    router.push(href);
-    setOpen(false);
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === href;
+    return pathname === href || pathname.startsWith(href + "/");
   };
 
   return (
@@ -54,50 +77,95 @@ export function MobileNav() {
           variant="ghost"
           className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden"
         >
-          <ViewVerticalIcon className="h-5 w-5" />
-          <span className="sr-only">{t("navigation.toggleMenu")}</span>
+          <Menu className="h-6 w-6" />
+          <span className="sr-only">Toggle Menu</span>
         </Button>
       </SheetTrigger>
-      <SheetContent
-        side="left"
-        className="pr-0"
-        dir={i18n.language === "bn" ? "rtl" : "ltr"}
-      >
-        <div
-          onClick={() => handleNavigation("/")}
-          className="flex cursor-pointer items-center py-4 text-primary"
-        >
-          <Icons.logo className="mr-2 h-4 w-4" />
-          <span className="font-bold">Salaatify</span>
+      <SheetContent side="right" className="w-[300px] p-0 sm:w-[350px]">
+        <div className="flex h-full flex-col">
+          {/* Header */}
+          <div className="border-b border-gray-100 px-6 py-5">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Icons.logo className="h-8 w-8 text-primary" />
+                <span className="text-lg font-bold text-gray-900">
+                  An Nur Masjid
+                </span>
+              </div>
+              {/* <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setOpen(false)}
+                className="h-8 w-8"
+              >
+                <X className="h-5 w-5" />
+              </Button> */}
+            </div>
+          </div>
+
+          {/* Navigation Items */}
+          <nav
+            className="flex-1 overflow-y-auto py-6"
+            dir={isBangla ? "rtl" : "ltr"}
+          >
+            <div className="space-y-1 px-3">
+              {navItems.map((item) => {
+                const active = isActive(item.href);
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className={cn(
+                      "flex items-center gap-3 rounded-lg px-4 py-3 text-base font-medium transition-all duration-200",
+                      active
+                        ? "bg-primary/10 text-primary shadow-sm"
+                        : "text-gray-700 hover:bg-gray-100 hover:text-gray-900",
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        "flex h-8 w-8 items-center justify-center rounded-lg",
+                        active ? "bg-primary/20 text-primary" : "text-gray-500",
+                      )}
+                    >
+                      {item.icon}
+                    </div>
+                    <span>{t(item.translationKey)}</span>
+                    {active && (
+                      <div className="ml-auto h-1.5 w-1.5 rounded-full bg-primary" />
+                    )}
+                  </Link>
+                );
+              })}
+            </div>
+          </nav>
+
+          {/* Footer */}
+          <div className="border-t border-gray-100 p-6">
+            <div className="rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 p-4">
+              <p className="mb-1 text-sm font-semibold text-gray-900">
+                {isBangla ? "আমাদের সাথে যুক্ত হন" : "Join Our Community"}
+              </p>
+              <p className="mb-3 text-xs text-gray-600">
+                {isBangla
+                  ? "ইসলামিক জ্ঞান ও সম্প্রদায়ের অংশ হোন"
+                  : "Be part of our Islamic knowledge community"}
+              </p>
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mb-4 block"
+              >
+                <Button className="w-full gap-2 bg-green-600 text-white hover:bg-green-700">
+                  <MessageCircle className="h-5 w-5" />
+                  {isBangla ? "হোয়াটসঅ্যাপ" : "Join Us"}
+                </Button>
+              </a>
+            </div>
+          </div>
         </div>
-        <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
-          <div className="flex flex-col space-y-3">
-            {mainNavItems.map((item) => (
-              <div
-                key={item.href}
-                onClick={() => handleNavigation(item.href)}
-                className="cursor-pointer text-sm font-medium hover:text-foreground/80"
-              >
-                {t(item.translationKey)}
-              </div>
-            ))}
-          </div>
-          <Separator className="my-4" />
-          <p className="mb-2 font-bold text-primary">
-            {t("navigation.sunnahBooks")}
-          </p>
-          <div className="flex flex-col space-y-3">
-            {sunnahNavItems.map((item) => (
-              <div
-                key={item.href}
-                onClick={() => handleNavigation(item.href)}
-                className="cursor-pointer text-sm font-medium hover:text-foreground/80"
-              >
-                {t(item.translationKey)}
-              </div>
-            ))}
-          </div>
-        </ScrollArea>
       </SheetContent>
     </Sheet>
   );

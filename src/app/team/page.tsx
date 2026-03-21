@@ -67,12 +67,12 @@ const TeamPage = () => {
       <section>
         <h2
           className="my-6 rounded-md bg-blue-100 px-4 py-2 text-center text-3xl font-bold text-blue-800 shadow-md"
-          dir={isBangla ? "rtl" : "ltr"}
+          dir={isBangla ? "ltr" : "ltr"}
         >
           {t("Our Team")}
         </h2>
         <div className="mb-10 space-y-4 rounded-lg bg-white p-6 leading-relaxed text-gray-700 shadow-lg">
-          <p dir={isBangla ? "rtl" : "ltr"}>
+          <p dir={isBangla ? "ltr" : "ltr"}>
             <Trans
               i18nKey="teamPage.description"
               components={{ 1: <span className="font-bold" /> }}
@@ -112,13 +112,13 @@ const TeamPage = () => {
               <div>
                 <h3
                   className="text-2xl font-bold text-gray-800"
-                  dir={isBangla ? "rtl" : "ltr"}
+                  dir={isBangla ? "ltr" : "ltr"}
                 >
                   {getLocalizedName(member)}
                 </h3>
                 <p
                   className="mt-1 text-lg font-semibold text-blue-600"
-                  dir={isBangla ? "rtl" : "ltr"}
+                  dir={isBangla ? "ltr" : "ltr"}
                 >
                   {getLocalizedRole(member)}
                 </p>
@@ -126,7 +126,7 @@ const TeamPage = () => {
               {getLocalizedDescription(member) && (
                 <p
                   className="leading-relaxed text-gray-600"
-                  dir={isBangla ? "rtl" : "ltr"}
+                  dir={isBangla ? "ltr" : "ltr"}
                 >
                   {getLocalizedDescription(member)}
                 </p>

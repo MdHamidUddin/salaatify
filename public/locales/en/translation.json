@@ -4,7 +4,9 @@
     "subtitle": "Get accurate prayer times customized to your location so you never miss salah. Check the Islamic calendar for important dates.",
     "subsubtitle": "Bringing you authentic resources for your Islamic lifestyle needs and worship."
   },
+  
   "navigation": {
+    "home": "Home",
     "prayerTimes": "Prayer Times",
     "names": "Allah Names",
     "qibla": "Qibla",
@@ -14,7 +16,9 @@
     "team": "Team Members",
     "courses": "Our Courses",
     "teachers": "Our Teachers",
-    "videos": "Videos"
+    "videos": "Videos",
+    "settings": "Language",
+    "theme": "Theme"
   },
   "prayerNames": {
     "fajr": "Fajr",
