@@ -1,17 +1,28 @@
 {
-  "home":{
-    "title":"Empowering You with Resources for Islamic Living",
-    "subtitle":"Get accurate prayer times customized to your location so you never miss salah. Check the Islamic calendar for important dates.",
-    "subsubtitle":"Bringing you authentic resources for your Islamic lifestyle needs and worship."
+  "home": {
+    "title": "Empowering You with Resources for Islamic Living",
+    "subtitle": "Get accurate prayer times customized to your location so you never miss salah. Check the Islamic calendar for important dates.",
+    "subsubtitle": "Bringing you authentic resources for your Islamic lifestyle needs and worship."
   },
-  "navigation":{
-    "prayerTimes":"Prayer Times",
-    "names":"Allah Names",
-    "qibla":"Qibla",
-    "sunnah":"Sunnah",
-    "hadith":"Hadith",
-    "about":"About",
-    "team":"Team Members"
+  "navigation": {
+    "prayerTimes": "Prayer Times",
+    "names": "Allah Names",
+    "qibla": "Qibla",
+    "sunnah": "Sunnah",
+    "hadith": "Hadith",
+    "about": "About",
+    "team": "Team Members",
+    "courses": "Our Courses",
+    "teachers": "Our Teachers",
+    "videos": "Videos"
+  },
+  "prayerNames": {
+    "fajr": "Fajr",
+    "sunrise": "Sunrise",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha"
   },
   "allahNames": {
     "title": "99 Names of Allah",
@@ -23,16 +34,62 @@
       "part5": "Overall, <1>The 99 Names of Allah</1> are an important part of Islamic belief and practice. They serve as a reminder of the many qualities and attributes that Allah possesses. By understanding and contemplating on the 99 Names of Allah, Muslims can deepen their connection with Allah and gain a greater appreciation for His greatness and majesty."
     }
   },
-  "prayerNames": {
-    "fajr": "Fajr",
-    "sunrise": "Sunrise",
-    "dhuhr": "Dhuhr",
-    "asr": "Asr",
-    "maghrib": "Maghrib",
-    "isha": "Isha"
+  "prayerSettings": {
+    "title": "Prayer Settings",
+    "madhab": "Madhab (School of Thought)",
+    "selectMadhab": "Select Madhab",
+    "calculationMethod": "Calculation Method",
+    "selectMethod": "Select Method",
+    "updated": "Settings Updated",
+    "madhabChanged": "Prayer times updated for {{madhab}} madhab",
+    "methodChanged": "Prayer times updated with new calculation method"
   },
-  "search":"search",
-   "nextPrayer": "{{prayerName}} is next",
-   "prayerTimesHeader":"Prayer Times for {{city}}",
-   "teamPage.description": "Our team members manage and operate the Islamic Foundation, helping us achieve our goals. Their diverse skills and experiences help drive our mission forward."
+  "prayer": {
+    "timeRange": "Valid time",
+    "in": "in",
+    "minutes": "min",
+    "current": "Current Prayer",
+    "next": "Next Prayer"
+  },
+  "qibla": "Qibla Direction",
+  "fromNorth": "from North",
+  "prohibitedTimes": {
+    "title": "Prohibited Prayer Times",
+    "sunrise": "Sunrise (Sunrise - 15 min after)",
+    "noon": "Noon (Zenith - Dhuhr)",
+    "sunset": "Sunset (Sunset - Maghrib)"
+  },
+  "madhab": "Madhab",
+  "map": {
+    "title": "Prayer Location Map",
+    "loading": "Loading map...",
+    "location": "Location",
+    "prayerLocation": "Prayer Location",
+    "loadError": "Failed to load map. Please check your connection."
+  },
+  "timezone": "TimeZone",
+  "location": "Location",
+  "coordinates": "Coordinates",
+  "hijriDate": "Hijri Date",
+  "loadingPrayerTimes": "Loading Prayer Times",
+  "prayerErrors": {
+    "loadFailed": "Failed to load data. Please check your internet connection."
+  },
+  "search": "Search",
+  "nextPrayer": "{{prayerName}} is next",
+  "prayerTimesHeader": "Prayer Times for {{city}}",
+  "teamPage": {
+    "description": "Our team members manage and operate the Islamic Foundation, helping us achieve our goals. Their diverse skills and experiences help drive our mission forward."
+  },
+  "error": "Error",
+  "retry": "Retry",
+  "loading": "Loading...",
+  "A list of 99 Names of Allah.": "A list of 99 Names of Allah.",
+  "Name": "Name",
+  "English": "English",
+  "Meaning": "Meaning",
+  "Our Team": "Our Team",
+  "Loading team members...": "Loading team members...",
+  "Our Courses": "Our Courses",
+  "Our Teachers": "Our Teachers"
 }

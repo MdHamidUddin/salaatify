@@ -1,66 +1,17 @@
 import type { Icons } from "@/components/icons";
 
-export interface PrayerTimings {
-  Fajr: string;
-  Sunrise: string;
-  Dhuhr: string;
-  Asr: string;
-  Maghrib: string;
-  Isha: string;
-}
-
-export interface PrayerCardProps {
-  name: string;
-  time?: string;
-  isCurrent: boolean;
-  isNext: boolean;
-  icon: keyof typeof Icons;
-}
-
-export type TimezoneProps = {
-  date: {
-    gregorian: {
-      date: string;
-      day: string;
-      format: string;
-      weekday: {
-        en: string;
-        number: number;
-      };
-      month: { number: number; en: string };
-      year: string;
+export type AllahNamesProps = {
+  code: number;
+  status: string;
+  data: Array<{
+    name: string;
+    transliteration: string;
+    number: number;
+    en: {
+      meaning: string;
     };
-    hijri: {
-      date: string;
-      format: string;
-      day: string;
-      month: {
-        ar: string;
-        en: string;
-        number: number;
-      };
-      weekday: { ar: string; en: string };
-      year: string;
-    };
-    readable: string;
-    timestamp: string;
-  };
-  meta: {
-    latitude: number;
-    longitude: number;
-    method: {
-      id: number;
-      location: {
-        latitude: number;
-        longitude: number;
-      };
-      name: string;
-    };
-    timezone: string;
-  };
-  timings: Record<string, string>;
+  }>;
 };
-
 export type GeolocationProps = {
   ip: string;
   network: string;
@@ -90,83 +41,207 @@ export type GeolocationProps = {
   asn: string;
   org: string;
 };
-
-export type PrayerItemsProps = {
-  prayers: Array<PrayerCardProps>;
-  currentTime: string;
-  locale?: string;
-  geolocation: GeolocationProps;
-  data: unknown;
-  date: Date;
-};
-
-export type PrayersInfoProps = {
-  firstUpcomingPrayer: number;
-  prayers: Array<PrayerCardProps>;
-  currentTime: string;
-  locale?: string;
-  geolocation: GeolocationProps;
-  data: unknown;
-  date: Date;
-};
-
-export type PrayerCalendarProps = {
-  prayers: Array<PrayerCardProps>;
-  locale?: string;
-  calendar: { data: Array<TimezoneProps> };
-  date: Date;
-};
-
-export type AllahNamesProps = {
-  code: number;
-  status: string;
-  data: Array<{
-    name: string;
-    transliteration: string;
-    number: number;
-    en: {
-      meaning: string;
-    };
-  }>;
-};
-
-export type ChapterProps = {
-  status: number;
-  message: string;
-  chapters: Chapter[];
-};
-
-type Chapter = {
-  id: number;
-  chapterNumber: string;
-  chapterEnglish: string;
-  chapterUrdu: string;
-  chapterArabic: string;
-  bookSlug: string;
-};
-
-interface Hadith {
-  id: number;
-  hadithNumber: string;
-  englishNarrator: string;
-  hadithEnglish: string;
-  hadithUrdu: string;
-  urduNarrator: string;
-  hadithArabic: string;
-  headingArabic: string | null;
-  headingUrdu: string | null;
-  headingEnglish: string | null;
-  chapterId: string;
-  bookSlug: string;
+export interface PrayerTimings {
+  Fajr: string;
+  Sunrise: string;
+  Dhuhr: string;
+  Asr: string;
+  Maghrib: string;
+  Isha: string;
+  Imsak: string;
+  Midnight: string;
+  Firstthird?: string;
+  Lastthird?: string;
+  Sunset?: string;
 }
 
-export interface HadithsProps {
-  status: number;
-  message: string;
-  hadiths: {
-    current_page: number;
-    data: Hadith[];
+export interface PrayerCardProps {
+  name: string;
+  time?: string;
+  isCurrent: boolean;
+  isNext: boolean;
+  icon: keyof typeof Icons;
+  timeRange?: {
+    start: string;
+    end: string;
   };
+}
+
+export interface PrayerSettings {
+  madhab: "Shafi" | "Hanafi";
+  method: number;
+  autoLocation: boolean;
+}
+
+export interface LocationData {
+  latitude: number;
+  longitude: number;
+  city: string;
+  country: string;
+  countryCode?: string;
+  timezone?: string;
+  loading: boolean;
+  error: string | null;
+  permissionGranted: boolean;
+}
+
+// New API Response Types
+export interface IslamicAPIPrayerResponse {
+  code: number;
+  status: string;
+  data: {
+    times: {
+      Fajr: string;
+      Sunrise: string;
+      Dhuhr: string;
+      Asr: string;
+      Sunset: string;
+      Maghrib: string;
+      Isha: string;
+      Imsak: string;
+      Midnight: string;
+      Firstthird?: string;
+      Lastthird?: string;
+    };
+    date: {
+      readable: string;
+      timestamp: string;
+      hijri: {
+        date: string;
+        format: string;
+        day: string;
+        weekday: {
+          en: string;
+          ar: string;
+        };
+        month: {
+          number: number;
+          en: string;
+          ar: string;
+          days: number;
+        };
+        year: string;
+        designation: {
+          abbreviated: string;
+          expanded: string;
+        };
+        holidays: string[];
+        adjustedHolidays: string[];
+        method: string;
+        shift: number;
+      };
+      gregorian: {
+        date: string;
+        format: string;
+        day: string;
+        weekday: {
+          en: string;
+        };
+        month: {
+          number: number;
+          en: string;
+        };
+        year: string;
+        designation: {
+          abbreviated: string;
+          expanded: string;
+        };
+      };
+    };
+    qibla: {
+      direction: {
+        degrees: number;
+        from: string;
+        clockwise: boolean;
+      };
+      distance: {
+        value: number;
+        unit: string;
+      };
+    };
+    prohibited_times: {
+      sunrise: {
+        start: string;
+        end: string;
+      };
+      noon: {
+        start: string;
+        end: string;
+      };
+      sunset: {
+        start: string;
+        end: string;
+      };
+    };
+    timezone: {
+      name: string;
+      utc_offset: string;
+      abbreviation: string;
+    };
+  };
+}
+
+export type TimezoneProps = {
+  timings: PrayerTimings;
+  date: {
+    readable: string;
+    timestamp: string;
+    hijri: {
+      date: string;
+      month: { number: number; en: string; ar: string };
+      year: string;
+      weekday: { en: string; ar: string };
+    };
+    gregorian: {
+      date: string;
+      weekday: { en: string };
+      month: { number: number; en: string };
+      year: string;
+    };
+  };
+  meta: {
+    latitude: number;
+    longitude: number;
+    timezone: string;
+    method: {
+      id: number;
+      name: string;
+    };
+    madhab: "Shafi" | "Hanafi";
+  };
+  qibla?: {
+    direction: number;
+    distance: number;
+  };
+  prohibited_times?: {
+    sunrise: { start: string; end: string };
+    noon: { start: string; end: string };
+    sunset: { start: string; end: string };
+  };
+};
+
+export interface PrayerInfoPanelProps {
+  geolocation: {
+    city: string;
+    country: string;
+    timezone: string;
+    latitude: number;
+    longitude: number;
+  };
+  timings: TimezoneProps;
+  settings?: PrayerSettings;
+  qibla?: {
+    direction: number;
+    distance: number;
+  };
+}
+
+export interface PrayersSectionProps {
+  searchText: string;
+  clicked: boolean;
+  setClicked: (clicked: boolean) => void;
+  settings?: PrayerSettings;
+  onSettingsChange?: (settings: PrayerSettings) => void;
 }
 
 export interface QiblaProps {
@@ -178,3 +253,4 @@ export interface QiblaProps {
     direction: number;
   };
 }
+// ... (keep your existing types below)

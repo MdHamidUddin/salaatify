@@ -20,8 +20,12 @@ export function MainNav() {
     // { href: "/prayers", translationKey: "navigation.prayerTimes" },
     { href: "/allah-names", translationKey: "navigation.names" },
     // { href: "/qibla", translationKey: "navigation.qibla" },
-    { href: "/sunnah", translationKey: "navigation.sunnah" },
+    // { href: "/sunnah", translationKey: "navigation.sunnah" },
     { href: "/team", translationKey: "navigation.team" },
+    { href: "/courses", translationKey: "navigation.courses" },
+    { href: "/teachers", translationKey: "navigation.teachers" },
+    // In your navigation component, add:
+    { href: "/videos", translationKey: "navigation.videos" },
   ];
 
   return (

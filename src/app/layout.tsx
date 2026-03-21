@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { siteConfig } from "@/config/site";
 import "@/styles/globals.css";
+import "leaflet/dist/leaflet.css";
 import { Toaster } from "@/components/ui/toaster";
 import { GeistSans } from "geist/font/sans";
 import { Providers } from "./provider"; // 👈 Add providers wrapper
@@ -27,9 +28,8 @@ export default function RootLayout({
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
             <main className="flex-1">
-               <Providers>
-              {children}
-             </Providers></main>
+              <Providers>{children}</Providers>
+            </main>
             <SiteFooter />
           </div>
           <Toaster />

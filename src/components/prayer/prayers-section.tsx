@@ -1,12 +1,16 @@
 "use client";
-import { getTimingsByCity } from "@/lib/get-prayer-times";
+
+import { getTimingsByCoordinates } from "@/lib/get-prayer-times";
 import PrayerCard from "./prayer-card";
-import type { PrayerCardProps, TimezoneProps } from "@/types";
+import type { PrayerCardProps, TimezoneProps, PrayerSettings } from "@/types";
 import PrayerInfoPanel from "./prayer-info-panel";
-import { Suspense, useEffect, useState } from "react";
+import { PrayerSettings as SettingsPanel } from "./prayer-settings";
+import { PrayerMap } from "./prayer-map";
+import { Suspense, useEffect, useState, useCallback } from "react";
 import { toast } from "../ui/use-toast";
 import { Loader } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "@/hooks/use-location";
 
 interface PrayersSectionProps {
   searchText: string;
@@ -22,66 +26,131 @@ export default function PrayersSection({
   const [data, setData] = useState<TimezoneProps | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [settings, setSettings] = useState<PrayerSettings>({
+    madhab: "Hanafi",
+    method: 2,
+    autoLocation: true,
+  });
   const { t } = useTranslation();
+  const location = useLocation();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        setIsError(false);
-        setClicked(false);
+  const createTimeInSeconds = useCallback((timeString?: string) => {
+    if (!timeString) return 0;
+    const time = new Date(`${new Date().toDateString()} ${timeString}`);
+    return time.getTime();
+  }, []);
 
-        const payload = {
-          country_name: "Bangladesh",
-          city: searchText,
-        };
+  const fetchData = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      setIsError(false);
 
-        const prayerData = await getTimingsByCity(payload);
-        if (prayerData) {
-          setData(prayerData);
-        }
-      } catch (error) {
-        toast({
-          variant: "destructive",
-          title: "Error",
-          description: "Error fetching prayer data. Please try again.",
-        });
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
+      let prayerData;
+      let lat = location.latitude;
+      let lng = location.longitude;
+
+      // If we have search text, try to get coordinates for that city
+      if (searchText && searchText !== location.city) {
+        // You could add geocoding here to convert city name to coordinates
+        // For now, use the provided coordinates
+        // lat = 24.75577914926818;
+        // lng = 88.25071497014827;
+        lat = location.latitude;
+        lng = location.longitude;
       }
-    };
 
+      prayerData = await getTimingsByCoordinates({
+        latitude: lat,
+        longitude: lng,
+        method: settings.method,
+        madhab: settings.madhab,
+      });
+
+      if (prayerData) {
+        setData(prayerData);
+        setClicked(false);
+      }
+    } catch (error) {
+      console.error("Error fetching prayer data:", error);
+      toast({
+        variant: "destructive",
+        title: t("error"),
+        description: t("prayerErrors.loadFailed"),
+      });
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [
+    location.latitude,
+    location.longitude,
+    searchText,
+    settings.method,
+    settings.madhab,
+    setClicked,
+    t,
+  ]);
+
+  // Initial fetch when component mounts or settings change
+  useEffect(() => {
+    if (!location.loading) {
+      void fetchData();
+    }
+  }, [location.loading, fetchData]);
+
+  // Fetch when search is clicked
+  useEffect(() => {
     if (clicked) {
       void fetchData();
     }
-    if (!data && searchText) {
-      void fetchData(); // Fetch data if searchText is provided
-    }
-  }, [clicked, searchText, setClicked]);
+  }, [clicked, fetchData]);
 
-  if (isLoading || !data) {
+  const handleMadhabChange = (madhab: "Shafi" | "Hanafi") => {
+    setSettings((prev) => ({ ...prev, madhab }));
+    toast({
+      title: t("prayerSettings.updated"),
+      description: t("prayerSettings.madhabChanged", { madhab }),
+    });
+  };
+
+  const handleMethodChange = (method: number) => {
+    setSettings((prev) => ({ ...prev, method }));
+    toast({
+      title: t("prayerSettings.updated"),
+      description: t("prayerSettings.methodChanged"),
+    });
+  };
+
+  // Loading state
+  if (location.loading || isLoading) {
     return (
       <section className="container grid min-h-[200px] place-content-center space-y-4">
         <p className="flex items-center text-lg font-medium text-gray-700">
-          <span>Loading Prayer Times</span>{" "}
+          <span>{t("loadingPrayerTimes")}</span>{" "}
           <Loader className="mx-4 h-5 w-5 animate-spin text-blue-600" />
         </p>
-        {isError && (
-          <p className="text-center text-red-500">
-            Failed to load data. Please check your internet connection or try a
-            different city.
-          </p>
-        )}
       </section>
     );
   }
 
-  const createTimeInSeconds = (timeString?: string) => {
-    const time = new Date(`${new Date().toDateString()} ${timeString}`);
-    return time.getTime();
-  };
+  // Error state
+  if (isError || !data) {
+    return (
+      <section className="container grid min-h-[200px] place-content-center space-y-4">
+        <div className="text-center">
+          <p className="mb-2 text-red-500">{t("prayerErrors.loadFailed")}</p>
+          <button
+            onClick={() => void fetchData()}
+            className="rounded-lg bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-700"
+          >
+            {t("retry")}
+          </button>
+        </div>
+      </section>
+    );
+  }
 
+  // Calculate prayer times in seconds
   const fajrTimeInSeconds = createTimeInSeconds(data.timings?.Fajr);
   const sunriseTimeInSeconds = createTimeInSeconds(data.timings?.Sunrise);
   const dhuhrTimeInSeconds = createTimeInSeconds(data.timings?.Dhuhr);
@@ -90,88 +159,148 @@ export default function PrayersSection({
   const ishaTimeInSeconds = createTimeInSeconds(data.timings?.Isha);
   const currentTimeInSeconds = new Date().getTime();
 
+  // Get current and next prayer indices
+  let currentPrayerIndex = -1;
+  let nextPrayerIndex = -1;
+
+  const prayerTimes = [
+    { name: "Fajr", time: fajrTimeInSeconds, end: sunriseTimeInSeconds },
+    { name: "Sunrise", time: sunriseTimeInSeconds, end: dhuhrTimeInSeconds },
+    { name: "Dhuhr", time: dhuhrTimeInSeconds, end: asrTimeInSeconds },
+    { name: "Asr", time: asrTimeInSeconds, end: maghribTimeInSeconds },
+    { name: "Maghrib", time: maghribTimeInSeconds, end: ishaTimeInSeconds },
+    {
+      name: "Isha",
+      time: ishaTimeInSeconds,
+      end: fajrTimeInSeconds + 24 * 60 * 60 * 1000,
+    },
+  ];
+
+  for (let i = 0; i < prayerTimes.length; i++) {
+    const prayer = prayerTimes[i];
+    const nextPrayer = prayerTimes[(i + 1) % prayerTimes.length];
+
+    if (
+      prayer &&
+      currentTimeInSeconds >= prayer?.time &&
+      currentTimeInSeconds < prayer?.end
+    ) {
+      currentPrayerIndex = i;
+      nextPrayerIndex = (i + 1) % prayerTimes.length;
+      break;
+    }
+  }
+
+  // Build prayers array with time ranges
   const prayers: PrayerCardProps[] = [
     {
       time: data.timings.Fajr,
       icon: "fajr",
       name: t("prayerNames.fajr"),
-      isCurrent:
-        currentTimeInSeconds >= fajrTimeInSeconds &&
-        currentTimeInSeconds < sunriseTimeInSeconds,
-      isNext: currentTimeInSeconds < fajrTimeInSeconds,
+      isCurrent: currentPrayerIndex === 0,
+      isNext: nextPrayerIndex === 0,
+      timeRange: {
+        start: data.timings.Fajr,
+        end: data.timings.Sunrise,
+      },
     },
     {
       time: data.timings.Sunrise,
       icon: "sunrise",
       name: t("prayerNames.sunrise"),
-      isCurrent:
-        currentTimeInSeconds >= sunriseTimeInSeconds &&
-        currentTimeInSeconds < dhuhrTimeInSeconds,
-      isNext:
-        currentTimeInSeconds < sunriseTimeInSeconds &&
-        currentTimeInSeconds > fajrTimeInSeconds,
+      isCurrent: currentPrayerIndex === 1,
+      isNext: nextPrayerIndex === 1,
+      timeRange: {
+        start: data.timings.Sunrise,
+        end: data.timings.Dhuhr,
+      },
     },
     {
       time: data.timings.Dhuhr,
       icon: "dhuhr",
       name: t("prayerNames.dhuhr"),
-      isCurrent:
-        currentTimeInSeconds >= dhuhrTimeInSeconds &&
-        currentTimeInSeconds < asrTimeInSeconds,
-      isNext:
-        currentTimeInSeconds < dhuhrTimeInSeconds &&
-        currentTimeInSeconds > sunriseTimeInSeconds,
+      isCurrent: currentPrayerIndex === 2,
+      isNext: nextPrayerIndex === 2,
+      timeRange: {
+        start: data.timings.Dhuhr,
+        end: data.timings.Asr,
+      },
     },
     {
       time: data.timings.Asr,
       icon: "asr",
       name: t("prayerNames.asr"),
-      isCurrent:
-        currentTimeInSeconds >= asrTimeInSeconds &&
-        currentTimeInSeconds < maghribTimeInSeconds,
-      isNext:
-        currentTimeInSeconds < asrTimeInSeconds &&
-        currentTimeInSeconds > dhuhrTimeInSeconds,
+      isCurrent: currentPrayerIndex === 3,
+      isNext: nextPrayerIndex === 3,
+      timeRange: {
+        start: data.timings.Asr,
+        end: data.timings.Maghrib,
+      },
     },
     {
       time: data.timings.Maghrib,
       icon: "maghrib",
       name: t("prayerNames.maghrib"),
-      isCurrent:
-        currentTimeInSeconds >= maghribTimeInSeconds &&
-        currentTimeInSeconds < ishaTimeInSeconds,
-      isNext:
-        currentTimeInSeconds < maghribTimeInSeconds &&
-        currentTimeInSeconds > asrTimeInSeconds,
+      isCurrent: currentPrayerIndex === 4,
+      isNext: nextPrayerIndex === 4,
+      timeRange: {
+        start: data.timings.Maghrib,
+        end: data.timings.Isha,
+      },
     },
     {
       time: data.timings.Isha,
       icon: "isha",
       name: t("prayerNames.isha"),
-      isCurrent:
-        currentTimeInSeconds >= ishaTimeInSeconds ||
-        currentTimeInSeconds < fajrTimeInSeconds,
-      isNext:
-        currentTimeInSeconds < ishaTimeInSeconds &&
-        currentTimeInSeconds > maghribTimeInSeconds,
+      isCurrent: currentPrayerIndex === 5,
+      isNext: nextPrayerIndex === 5,
+      timeRange: {
+        start: data.timings.Isha,
+        end: data.timings.Fajr,
+      },
     },
   ];
 
   const payload = {
-    city: searchText,
-    country: "Bangladesh",
-    timezone: "Asia",
+    city: location.city || searchText || "Rajshahi",
+    country: location.country || "Bangladesh",
+    timezone: data.meta.timezone || "Asia/Dhaka",
+    latitude: location.latitude,
+    longitude: location.longitude,
   };
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <section className="space-y-4 md:container">
-        <PrayerInfoPanel geolocation={payload} timings={data} />
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
-          {prayers.map((prayer) => (
-            <PrayerCard key={prayer.name} {...prayer} />
+    <Suspense fallback={<div>{t("loading")}</div>}>
+      <section className="space-y-4 pb-8 md:container">
+        {/* Settings Panel */}
+        <SettingsPanel
+          onMadhabChange={handleMadhabChange}
+          onMethodChange={handleMethodChange}
+          currentMadhab={settings.madhab}
+          currentMethod={settings.method}
+        />
+
+        {/* Prayer Info Panel with Qibla */}
+        <PrayerInfoPanel
+          geolocation={payload}
+          timings={data}
+          qibla={data.qibla}
+        />
+
+        {/* Prayer Cards Grid */}
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
+          {prayers.map((prayer, index) => (
+            <PrayerCard key={`${prayer.name}-${index}`} {...prayer} />
           ))}
         </div>
+
+        {/* Map */}
+        <PrayerMap
+          latitude={location.latitude}
+          longitude={location.longitude}
+          locationName={location.city || searchText || "Current Location"}
+          zoom={13}
+        />
       </section>
     </Suspense>
   );
