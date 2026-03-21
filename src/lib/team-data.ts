@@ -104,7 +104,7 @@ export const teamMembersData: TeamMember[] = [
   {
     id: 9,
     name: "Hafez Tareq Jamil",
-    nameBn: "হাফেজ তারেক জ্যামিল",
+    nameBn: "হাফেজ তারেক জামিল",
     role: "Member",
     roleBn: "শিক্ষক",
     image: "/teachers/teacher1.jpg",
@@ -117,7 +117,7 @@ export const teamMembersData: TeamMember[] = [
   {
     id: 7,
     name: "Md. Abdur Rajjak (Raju)",
-    nameBn: "মো: আবদুর রজজাক (রাজু)",
+    nameBn: "মো: আবদুর রাজ্জাক (রাজু)",
     role: "Member",
     roleBn: "সদস্য",
     image: "/teachers/teacher1.jpg",

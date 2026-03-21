@@ -135,7 +135,7 @@ export const PrayerMap = ({
 
   return (
     <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
+      <CardHeader className="flex flex-col items-center justify-between">
         <CardTitle>{t("map.title")}</CardTitle>
         <div className="flex gap-2">
           {/* View on Google Maps Button */}

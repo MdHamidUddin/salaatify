@@ -45,9 +45,9 @@ export function SiteFooter() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-2 text-gray-600">
                 <Phone className="h-4 w-4" />
-                <span>+880 1234 567890</span>
+                <span>+880 1716 742 229</span>
               </li>
-              <li className="flex items-center gap-2 text-gray-600">
+              {/* <li className="flex items-center gap-2 text-gray-600">
                 <Mail className="h-4 w-4" />
                 <a
                   href="mailto:info@annurmasjid.com"
@@ -55,7 +55,7 @@ export function SiteFooter() {
                 >
                   info@annurmasjid.com
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -118,7 +118,7 @@ export function SiteFooter() {
         {/* Bottom Bar */}
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm text-gray-500 md:text-left">
-            © {new Date().getFullYear()} An Nur Jame Masjid.
+            © {new Date().getFullYear()} An Nur Masjid.
             {isBangla ? " সর্বস্বত্ব সংরক্ষিত।" : " All rights reserved."}
           </p>
         </div>
