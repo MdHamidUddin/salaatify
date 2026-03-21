@@ -29,7 +29,7 @@ export const videosData: Video[] = [
     descriptionBn:
       "আল্লাহর সুন্দর নাম এবং তাদের অর্থ শিখুন। এই সিরিজটি প্রতিটি নাম বিস্তারিত ব্যাখ্যা সহ কভার করে।",
     youtubeId: "RvzHh3TogoU",
-    embedUrl: "https://www.youtube.com/watch?v=RvzHh3TogoU",
+    embedUrl: "https://www.youtube.com/embed/RvzHh3TogoU",
     thumbnail: "https://img.youtube.com/vi/RvzHh3TogoU/maxresdefault.jpg",
     duration: "15:24",
     category: "Islamic Knowledge",
@@ -50,7 +50,7 @@ export const videosData: Video[] = [
       "Step by step guide on how to perform Salah correctly according to Sunnah.",
     descriptionBn: "সুন্নাহ অনুযায়ী সঠিকভাবে সালাত আদায় করার ধাপে ধাপে গাইড।",
     youtubeId: "J2zq41iAf3k",
-    embedUrl: "https://www.youtube.com/watch?v=J2zq41iAf3k",
+    embedUrl: "https://www.youtube.com/embed/J2zq41iAf3k",
     thumbnail: "https://img.youtube.com/vi/J2zq41iAf3k/maxresdefault.jpg",
     duration: "22:15",
     category: "Prayer",
