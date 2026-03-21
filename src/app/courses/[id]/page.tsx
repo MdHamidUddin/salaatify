@@ -8,7 +8,7 @@ import { useTranslation } from "react-i18next";
 import { coursesData, type Course } from "@/lib/courses-data";
 
 const CourseDetailsPage = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const params = useParams();
   const [course, setCourse] = useState<Course | null>(null);
   const [loading, setLoading] = useState(true);
@@ -16,14 +16,14 @@ const CourseDetailsPage = () => {
   const isBangla = i18n.language === "bn";
 
   useEffect(() => {
-    const fetchCourse = async () => {
+    const fetchCourse = () => {
       try {
         setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 300));
+        void new Promise((resolve) => setTimeout(resolve, 300));
         const foundCourse = coursesData.find(
           (c) => c.id === parseInt(params.id as string),
         );
-        setCourse(foundCourse || null);
+        setCourse(foundCourse ?? null);
       } catch (err) {
         console.error("Failed to fetch course:", err);
       } finally {
@@ -32,7 +32,7 @@ const CourseDetailsPage = () => {
     };
 
     if (params.id) {
-      fetchCourse();
+      void fetchCourse();
     }
   }, [params.id]);
 
@@ -44,12 +44,6 @@ const CourseDetailsPage = () => {
     return isBangla && course?.descriptionBn
       ? course.descriptionBn
       : course?.description;
-  };
-
-  const getLocalizedDuration = () => {
-    return isBangla && course?.durationBn
-      ? course.durationBn
-      : course?.duration;
   };
 
   const getLocalizedLevel = () => {
@@ -110,12 +104,12 @@ const CourseDetailsPage = () => {
       {/* Course Header */}
       <div className="mb-8 overflow-hidden rounded-xl bg-white shadow-lg">
         <div className="relative h-80 w-full">
-          <img
+          <Image
             src={course.image}
-            alt={getLocalizedTitle() || ""}
-            // fill
+            alt={getLocalizedTitle() ?? ""}
+            fill
             className="object-cover"
-            // priority
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">

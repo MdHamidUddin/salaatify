@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-// import Image from "next/image";
+import Image from "next/image";
 import { Play, Clock, Eye, Calendar, User, Youtube } from "lucide-react";
 import { VideoPlayerModal } from "./video-player-modal";
-import { useTranslation } from "react-i18next";
 import type { Video } from "@/lib/videos-data";
 
 interface VideoCardProps {
@@ -13,7 +12,7 @@ interface VideoCardProps {
   getLocalizedTitle: (video: Video) => string;
   getLocalizedDescription: (video: Video) => string;
   getLocalizedPresenter: (video: Video) => string;
-  getLocalizedSeries: (video: Video) => string | any;
+  getLocalizedSeries: (video: Video) => string;
   formatViews: (views: number) => string;
   formatDate: (dateString: string) => string;
 }
@@ -28,7 +27,6 @@ export const VideoCard = ({
   formatViews,
   formatDate,
 }: VideoCardProps) => {
-  const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -39,10 +37,10 @@ export const VideoCard = ({
       >
         {/* Thumbnail with Play Button Overlay */}
         <div className="relative aspect-video overflow-hidden">
-          <img
+          <Image
             src={video.thumbnail}
             alt={getLocalizedTitle(video)}
-            // fill
+            fill
             className="object-cover transition-transform duration-300 group-hover:scale-105"
             onError={(e) => {
               const target = e.target as HTMLImageElement;

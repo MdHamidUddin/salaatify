@@ -38,37 +38,46 @@ export const useLocation = () => {
       }
 
       navigator.geolocation.getCurrentPosition(
-        async (position) => {
+        (position) => {
           const { latitude, longitude } = position.coords;
 
-          try {
-            // Reverse geocoding to get city and country
-            const response = await fetch(
-              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
-            );
-            const data = await response.json();
+          // Handle reverse geocoding asynchronously
+          const fetchLocationData = async () => {
+            try {
+              // Reverse geocoding to get city and country
+              const response = await fetch(
+                `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
+              );
+              const data = (await response.json()) as {
+                city?: string;
+                locality?: string;
+                countryName?: string;
+              };
 
-            setLocation({
-              latitude,
-              longitude,
-              city: data.city || data.locality || "Unknown",
-              country: data.countryName || "Bangladesh",
-              error: null,
-              loading: false,
-            });
-          } catch (error) {
-            setLocation((prev) => ({
-              ...prev,
-              latitude,
-              longitude,
-              loading: false,
-            }));
-            toast({
-              variant: "default",
-              title: "Location Detected",
-              description: "Using coordinates for prayer times.",
-            });
-          }
+              setLocation({
+                latitude,
+                longitude,
+                city: data.city ?? data.locality ?? "Unknown",
+                country: data.countryName ?? "Bangladesh",
+                error: null,
+                loading: false,
+              });
+            } catch (error) {
+              setLocation((prev) => ({
+                ...prev,
+                latitude,
+                longitude,
+                loading: false,
+              }));
+              toast({
+                variant: "default",
+                title: "Location Detected",
+                description: "Using coordinates for prayer times.",
+              });
+            }
+          };
+
+          void fetchLocationData();
         },
         (error) => {
           let errorMessage = "Unable to retrieve your location";

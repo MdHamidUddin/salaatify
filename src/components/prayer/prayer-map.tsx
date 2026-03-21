@@ -33,7 +33,9 @@ export const PrayerMap = ({
         // await import('leaflet/dist/leaflet.css');
 
         // Fix Leaflet icon issue in Next.js
-        delete (L.Icon.Default.prototype as any)._getIconUrl;
+        delete (
+          L.Icon.Default.prototype as L.Icon.Default & { _getIconUrl?: unknown }
+        )._getIconUrl;
         L.Icon.Default.mergeOptions({
           iconRetinaUrl:
             "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
@@ -65,11 +67,11 @@ export const PrayerMap = ({
           });
 
           // Add marker
-          const marker = L.marker([latitude, longitude], {
+          L.marker([latitude, longitude], {
             icon: customIcon,
           }).addTo(map).bindPopup(`
               <div style="font-family: sans-serif;">
-                <b>${locationName || t("map.prayerLocation")}</b><br/>
+                <b>${locationName ?? t("map.prayerLocation")}</b><br/>
                 <small>Lat: ${latitude.toFixed(4)}<br/>Lng: ${longitude.toFixed(
                   4,
                 )}</small>
@@ -89,14 +91,14 @@ export const PrayerMap = ({
       } catch (err) {
         console.error("Failed to load map:", err);
         setError(
-          t("map.loadError") ||
+          t("map.loadError") ??
             "Failed to load map. Please check your connection.",
         );
       }
     };
 
     if (typeof window !== "undefined") {
-      loadMap();
+      void loadMap();
     }
   }, [latitude, longitude, locationName, zoom, mapLoaded, t]);
 

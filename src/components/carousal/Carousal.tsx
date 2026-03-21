@@ -1,6 +1,7 @@
 "use client"; // This component needs client-side interactivity
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react"; // Using lucide-react for icons
 
 // Updated images array with captions
@@ -54,7 +55,7 @@ const Carousel = () => {
     <div className="relative mx-auto my-8 w-full max-w-7xl overflow-hidden rounded-xl shadow-2xl">
       {/* Carousel Image Container */}
       <div className="relative h-48 sm:h-64 md:h-80 lg:h-96">
-        <img
+        <Image
           // Use key to force re-render and trigger transition on image change
           key={currentIndex}
           src={images[currentIndex]?.src ?? ""}
@@ -62,7 +63,8 @@ const Carousel = () => {
             images[currentIndex]?.caption ??
             `Carousel Image ${currentIndex + 1}`
           }
-          className="h-full w-full object-cover opacity-100 transition-opacity duration-700 ease-in-out" // Increased duration for smoother fade
+          fill
+          className="object-cover opacity-100 transition-opacity duration-700 ease-in-out" // Increased duration for smoother fade
           onError={(e) => {
             (e.target as HTMLImageElement).src =
               "https://placehold.co/1200x400/CCCCCC/000000?text=Image+Load+Error";

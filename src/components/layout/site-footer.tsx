@@ -1,6 +1,3 @@
-import { links } from "@/config/site";
-import { Button } from "../ui/button";
-import Link from "next/link";
 import { Separator } from "../ui/separator";
 
 export function SiteFooter() {

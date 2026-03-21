@@ -17,7 +17,7 @@ const PrayerInfoPanel = ({
   timings,
   qibla,
 }: PrayerInfoPanelProps) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   return (
     <Card className="space-y-4" suppressHydrationWarning>

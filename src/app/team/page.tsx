@@ -15,10 +15,10 @@ const TeamPage = () => {
   const isBangla = i18n.language === "bn";
 
   useEffect(() => {
-    const fetchTeamMembers = async () => {
+    const fetchTeamMembers = () => {
       try {
         setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        void new Promise((resolve) => setTimeout(resolve, 500));
         setTeamMembers(teamMembersData);
       } catch (err) {
         console.error("Failed to fetch team members:", err);
@@ -28,7 +28,7 @@ const TeamPage = () => {
       }
     };
 
-    fetchTeamMembers();
+    void fetchTeamMembers();
   }, []);
 
   const getLocalizedName = (member: TeamMember) => {

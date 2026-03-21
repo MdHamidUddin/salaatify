@@ -1,5 +1,5 @@
 const API_KEY =
-  process.env.NEXT_PUBLIC_ISLAMIC_API_KEY ||
+  process.env.NEXT_PUBLIC_ISLAMIC_API_KEY ??
   "mh6IR67lg6rjQhGy80HScTCBaf7DrRaWTFdLk40THGv0w8st";
 const BASE_URL = "https://islamicapi.com/api/v1/prayer-time";
 
@@ -15,7 +15,7 @@ export const getTimingsByCoordinates = async ({
   longitude,
   method = 2,
   madhab = "Hanafi",
-}: PrayerParams) => {
+}: PrayerParams): Promise<TimezoneProps> => {
   try {
     // school=0 for Hanafi, school=1 for Shafi
     const school = madhab === "Hanafi" ? 0 : 1;
@@ -23,7 +23,7 @@ export const getTimingsByCoordinates = async ({
     const url = `${BASE_URL}/?lat=${latitude}&lon=${longitude}&method=${method}&school=${school}&api_key=${API_KEY}`;
 
     const response = await fetch(url);
-    const result: IslamicAPIPrayerResponse = await response.json();
+    const result = (await response.json()) as IslamicAPIPrayerResponse;
 
     if (result.code === 200 && result.data) {
       const { times, date, qibla, prohibited_times, timezone } = result.data;
@@ -112,7 +112,7 @@ export const getTimingsByCity = async ({
     )}&method=${method}&school=${school}&api_key=${API_KEY}`;
 
     const response = await fetch(url);
-    const result: IslamicAPIPrayerResponse = await response.json();
+    const result = (await response.json()) as IslamicAPIPrayerResponse;
 
     if (result.code === 200 && result.data) {
       const { times, date, qibla, prohibited_times, timezone } = result.data;
@@ -197,8 +197,7 @@ const getMethodName = (methodId: number): string => {
     13: "Diyanet İşleri Başkanlığı, Turkey",
     14: "Spiritual Administration of Muslims of Russia",
   };
-  return methods[methodId] || "Unknown Method";
+  return methods[methodId] ?? "Unknown Method";
 };
 
-// Import the type
-import type { IslamicAPIPrayerResponse } from "@/types";
+import type { IslamicAPIPrayerResponse, TimezoneProps } from "@/types";

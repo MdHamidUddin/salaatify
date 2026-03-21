@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { teachersData, type Teacher } from "@/lib/teachers-data";
 
 const TeachersPage = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<null | string>(null);
@@ -15,10 +15,10 @@ const TeachersPage = () => {
   const isBangla = i18n.language === "bn";
 
   useEffect(() => {
-    const fetchTeachers = async () => {
+    const fetchTeachers = () => {
       try {
         setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        void new Promise((resolve) => setTimeout(resolve, 500));
         setTeachers(teachersData);
       } catch (err) {
         console.error("Failed to fetch teachers:", err);
@@ -28,7 +28,7 @@ const TeachersPage = () => {
       }
     };
 
-    fetchTeachers();
+    void fetchTeachers();
   }, []);
 
   const getLocalizedName = (teacher: Teacher) => {

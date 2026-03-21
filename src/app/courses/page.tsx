@@ -15,10 +15,10 @@ const CoursesPage = () => {
   const isBangla = i18n.language === "bn";
 
   useEffect(() => {
-    const fetchCourses = async () => {
+    const fetchCourses = () => {
       try {
         setLoading(true);
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        void new Promise((resolve) => setTimeout(resolve, 500));
         setCourses(coursesData);
       } catch (err) {
         console.error("Failed to fetch courses:", err);
@@ -28,7 +28,7 @@ const CoursesPage = () => {
       }
     };
 
-    fetchCourses();
+    void fetchCourses();
   }, []);
 
   const getLocalizedTitle = (course: Course) => {
@@ -39,10 +39,6 @@ const CoursesPage = () => {
     return isBangla && course.descriptionBn
       ? course.descriptionBn
       : course.description;
-  };
-
-  const getLocalizedDuration = (course: Course) => {
-    return isBangla && course.durationBn ? course.durationBn : course.duration;
   };
 
   const getLocalizedLevel = (course: Course) => {
@@ -102,10 +98,10 @@ const CoursesPage = () => {
               <div className="group h-full cursor-pointer rounded-xl bg-white shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl">
                 {/* Course Image */}
                 <div className="relative h-56 w-full overflow-hidden rounded-t-xl">
-                  <img
+                  <Image
                     src={course.image}
                     alt={getLocalizedTitle(course)}
-                    // fill
+                    fill
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   />

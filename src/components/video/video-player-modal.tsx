@@ -19,9 +19,8 @@ export const VideoPlayerModal = ({
   videoTitle,
   youtubeUrl,
 }: VideoPlayerModalProps) => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [isFullscreen, setIsFullscreen] = useState(false);
-  const [isPlaying, setIsPlaying] = useState(false);
   const isBangla = i18n.language === "bn";
 
   useEffect(() => {
@@ -51,11 +50,11 @@ export const VideoPlayerModal = ({
 
     if (!isFullscreen) {
       if (modalContent.requestFullscreen) {
-        modalContent.requestFullscreen();
+        void modalContent.requestFullscreen();
       }
     } else {
       if (document.exitFullscreen) {
-        document.exitFullscreen();
+        void document.exitFullscreen();
       }
     }
   };

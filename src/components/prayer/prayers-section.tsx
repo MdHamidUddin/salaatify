@@ -45,23 +45,9 @@ export default function PrayersSection({
       setIsLoading(true);
       setIsError(false);
 
-      let prayerData;
-      let lat = location.latitude;
-      let lng = location.longitude;
-
-      // If we have search text, try to get coordinates for that city
-      if (searchText && searchText !== location.city) {
-        // You could add geocoding here to convert city name to coordinates
-        // For now, use the provided coordinates
-        // lat = 24.75577914926818;
-        // lng = 88.25071497014827;
-        lat = location.latitude;
-        lng = location.longitude;
-      }
-
-      prayerData = await getTimingsByCoordinates({
-        latitude: lat,
-        longitude: lng,
+      const prayerData = await getTimingsByCoordinates({
+        latitude: location.latitude,
+        longitude: location.longitude,
         method: settings.method,
         madhab: settings.madhab,
       });
@@ -84,7 +70,6 @@ export default function PrayersSection({
   }, [
     location.latitude,
     location.longitude,
-    searchText,
     settings.method,
     settings.madhab,
     setClicked,
@@ -178,7 +163,6 @@ export default function PrayersSection({
 
   for (let i = 0; i < prayerTimes.length; i++) {
     const prayer = prayerTimes[i];
-    const nextPrayer = prayerTimes[(i + 1) % prayerTimes.length];
 
     if (
       prayer &&

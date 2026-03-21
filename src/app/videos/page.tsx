@@ -7,7 +7,7 @@ import { VideoCard } from "@/components/video/video-card";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 const VideosPage = () => {
-  const { t, i18n } = useTranslation();
+  const { i18n } = useTranslation();
   const [videos, setVideos] = useState<Video[]>([]);
   const [filteredVideos, setFilteredVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ const VideosPage = () => {
       }
     };
 
-    fetchVideos();
+    void fetchVideos();
   }, []);
 
   // Get unique categories and series for filters
@@ -83,7 +83,10 @@ const VideosPage = () => {
   };
 
   const getLocalizedSeries = (video: Video) => {
-    return isBangla && video.seriesBn ? video.seriesBn : video.series;
+    if (isBangla && video.seriesBn) {
+      return video.seriesBn;
+    }
+    return video.series ?? "";
   };
 
   const formatViews = (views: number) => {

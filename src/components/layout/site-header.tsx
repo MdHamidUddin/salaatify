@@ -1,14 +1,8 @@
 "use client";
-import Link from "next/link";
 
-import { links } from "@/config/site";
-import { cn } from "@/lib/utils";
-// import { CommandMenu } from "@/components/search/command-menu";
-import { Icons } from "@/components/icons";
 import { MainNav } from "@/components/layout/main-nav";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { ThemeToggle } from "@/components/theme/theme-toggle";
-import { buttonVariants } from "@/components/ui/button";
 import LanguageSwitcher from "../LanguageSwitcher";
 
 export function SiteHeader() {

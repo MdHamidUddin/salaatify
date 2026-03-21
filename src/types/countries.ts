@@ -24,13 +24,6 @@ interface Maps {
   openStreetMaps: string;
 }
 
-interface Demonyms {
-  eng: {
-    f: string;
-    m: string;
-  };
-}
-
 interface PostalCode {
   format: string;
   regex: string;

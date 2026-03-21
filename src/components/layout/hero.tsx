@@ -2,7 +2,7 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import React, { useState, FormEvent, ChangeEvent } from "react";
+import React, { useState, type FormEvent, type ChangeEvent } from "react";
 
 interface HeroProps {
   setSearchText: (text: string) => void;
