@@ -26,7 +26,7 @@ export const teachersData: Teacher[] = [
     degreeBn: "কুরআনিক স্টাডিজে স্নাতকোত্তর, আল-আজহার বিশ্ববিদ্যালয়",
     position: "Head of Hafizia Program",
     positionBn: "হাফিজিয়া প্রোগ্রামের প্রধান",
-    image: "/teachers/teacher1.jpg",
+    image: "/team/amin.jpeg",
     bio: "With over 20 years of experience in Quran memorization and teaching, Qari Abdul Rahman has helped hundreds of students become Hafiz. His unique teaching methodology combines traditional memorization techniques with modern pedagogical approaches.",
     bioBn:
       "কুরআন মুখস্থ এবং শিক্ষাদানে ২০ বছরেরও বেশি অভিজ্ঞতা নিয়ে, কারী আব্দুর রহমান শত শত শিক্ষার্থীকে হাফিজ হতে সাহায্য করেছেন। তাঁর অনন্য শিক্ষা পদ্ধতি ঐতিহ্যবাহী মুখস্থ কৌশলকে আধুনিক শিক্ষাগত পদ্ধতির সাথে একত্রিত করে।",
