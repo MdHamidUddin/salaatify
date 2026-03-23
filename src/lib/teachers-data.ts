@@ -45,7 +45,7 @@ export const teachersData: Teacher[] = [
     degreeBn: "মুফতি, দারুল উলূম দেওবন্দ; ইসলামিক আইনশাস্ত্রে পিএইচডি",
     position: "Head of General Madrasa Education",
     positionBn: "সাধারণ মাদ্রাসা শিক্ষার প্রধান",
-    image: "/teachers/teacher1.jpg",
+    image: "/team/tarek-jamil.jpeg",
     bio: "A renowned Islamic scholar with expertise in Fiqh, Hadith, and Islamic jurisprudence. Mufti Abdullah has authored several books on contemporary Islamic issues and has been teaching for over 15 years.",
     bioBn:
       "ফিকহ, হাদিস এবং ইসলামিক আইনশাস্ত্রে দক্ষতা সম্পন্ন একজন প্রখ্যাত ইসলামিক পণ্ডিত। মুফতি আব্দুল্লাহ সমসাময়িক ইসলামিক বিষয়ে বেশ কয়েকটি বই রচনা করেছেন এবং ১৫ বছরেরও বেশি সময় ধরে শিক্ষাদান করছেন।",

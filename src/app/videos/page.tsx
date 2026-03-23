@@ -122,7 +122,7 @@ const VideosPage = () => {
       <section>
         <h2
           className="my-6 rounded-md bg-gradient-to-r from-red-600 to-red-700 px-4 py-3 text-center text-3xl font-bold text-white shadow-md"
-          dir={isBangla ? "rtl" : "ltr"}
+          dir={isBangla ? "ltr" : "ltr"}
         >
           🎬 {isBangla ? "ইসলামিক ভিডিও লাইব্রেরি" : "Islamic Video Library"}
         </h2>

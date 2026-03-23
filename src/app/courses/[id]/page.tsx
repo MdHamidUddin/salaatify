@@ -115,7 +115,7 @@ const CourseDetailsPage = () => {
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
             <h1
               className="mb-2 text-4xl font-bold"
-              dir={isBangla ? "rtl" : "ltr"}
+              dir={isBangla ? "ltr" : "ltr"}
             >
               {getLocalizedTitle()}
             </h1>
@@ -140,7 +140,7 @@ const CourseDetailsPage = () => {
             </h2>
             <p
               className="leading-relaxed text-gray-700"
-              dir={isBangla ? "rtl" : "ltr"}
+              dir={isBangla ? "ltr" : "ltr"}
             >
               {getLocalizedDescription()}
             </p>
@@ -151,7 +151,7 @@ const CourseDetailsPage = () => {
             <h2 className="mb-4 text-2xl font-bold text-gray-800">
               {isBangla ? "পাঠ্যসূচি" : "Curriculum"}
             </h2>
-            <ul className="space-y-2" dir={isBangla ? "rtl" : "ltr"}>
+            <ul className="space-y-2" dir={isBangla ? "ltr" : "ltr"}>
               {getLocalizedCurriculum()?.map((item, index) => (
                 <li
                   key={index}
@@ -169,7 +169,7 @@ const CourseDetailsPage = () => {
             <h2 className="mb-4 text-2xl font-bold text-gray-800">
               {isBangla ? "শেখার ফলাফল" : "Learning Outcomes"}
             </h2>
-            <ul className="space-y-2" dir={isBangla ? "rtl" : "ltr"}>
+            <ul className="space-y-2" dir={isBangla ? "ltr" : "ltr"}>
               {getLocalizedLearningOutcomes()?.map((outcome, index) => (
                 <li
                   key={index}
@@ -236,7 +236,7 @@ const CourseDetailsPage = () => {
               </h4>
               <ul
                 className="space-y-1 text-sm text-gray-600"
-                dir={isBangla ? "rtl" : "ltr"}
+                dir={isBangla ? "ltr" : "ltr"}
               >
                 {getLocalizedRequirements()?.map((req, index) => (
                   <li key={index} className="flex items-start gap-1">

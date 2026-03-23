@@ -77,12 +77,12 @@ const CoursesPage = () => {
       <section>
         <h2
           className="my-6 rounded-md bg-blue-100 px-4 py-2 text-center text-3xl font-bold text-blue-800 shadow-md"
-          dir={isBangla ? "rtl" : "ltr"}
+          dir={isBangla ? "ltr" : "ltr"}
         >
           {t("Our Courses")}
         </h2>
         <div className="mb-10 rounded-lg bg-white p-6 leading-relaxed text-gray-700 shadow-lg">
-          <p className="text-center text-lg" dir={isBangla ? "rtl" : "ltr"}>
+          <p className="text-center text-lg" dir={isBangla ? "ltr" : "ltr"}>
             {isBangla
               ? "আমাদের বিভিন্ন কোর্সের মাধ্যমে ইসলামিক জ্ঞান অর্জন করুন। সব বয়সের এবং স্তরের জন্য উপযুক্ত।"
               : "Gain Islamic knowledge through our diverse courses. Suitable for all ages and levels."}
@@ -114,14 +114,14 @@ const CoursesPage = () => {
                 <div className="p-6">
                   <h3
                     className="mb-2 line-clamp-2 text-2xl font-bold text-gray-800"
-                    dir={isBangla ? "rtl" : "ltr"}
+                    dir={isBangla ? "ltr" : "ltr"}
                   >
                     {getLocalizedTitle(course)}
                   </h3>
 
                   <p
                     className="mb-4 line-clamp-3 text-gray-600"
-                    dir={isBangla ? "rtl" : "ltr"}
+                    dir={isBangla ? "ltr" : "ltr"}
                   >
                     {getLocalizedDescription(course)}
                   </p>

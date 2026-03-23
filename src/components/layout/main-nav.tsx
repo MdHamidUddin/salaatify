@@ -26,6 +26,7 @@ export function MainNav() {
     { href: "/courses", translationKey: "navigation.courses" },
     { href: "/teachers", translationKey: "navigation.teachers" },
     { href: "/videos", translationKey: "navigation.videos" },
+    { href: "/donation", translationKey: "navigation.donation" },
   ];
 
   return (
@@ -35,7 +36,7 @@ export function MainNav() {
         <Link href="/" className="mr-6 flex items-center space-x-2">
           <Icons.logo className="h-6 w-6" />
           <span className="hidden font-bold sm:inline-block">
-            An Nur Masjid
+            An Noor Masjid
           </span>
         </Link>
         <nav className="hidden items-center space-x-6 text-sm font-medium md:flex">

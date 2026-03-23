@@ -91,12 +91,12 @@ const TeachersPage = () => {
       <section>
         <h2
           className="my-6 rounded-md bg-blue-100 px-4 py-2 text-center text-3xl font-bold text-blue-800 shadow-md"
-          dir={isBangla ? "rtl" : "ltr"}
+          dir={isBangla ? "ltr" : "ltr"}
         >
           {isBangla ? "আমাদের শিক্ষকবৃন্দ" : "Our Teachers"}
         </h2>
         <div className="mb-10 rounded-lg bg-white p-6 leading-relaxed text-gray-700 shadow-lg">
-          <p className="text-center text-lg" dir={isBangla ? "rtl" : "ltr"}>
+          <p className="text-center text-lg" dir={isBangla ? "ltr" : "ltr"}>
             {isBangla
               ? "আমাদের অভিজ্ঞ ও দক্ষ শিক্ষকমণ্ডলী আপনার ইসলামিক শিক্ষার যাত্রায় সঙ্গী হতে প্রস্তুত।"
               : "Our experienced and dedicated faculty members are ready to guide you on your Islamic learning journey."}
@@ -132,19 +132,19 @@ const TeachersPage = () => {
               <div className="p-6">
                 <h3
                   className="mb-1 text-xl font-bold text-gray-800"
-                  dir={isBangla ? "rtl" : "ltr"}
+                  dir={isBangla ? "ltr" : "ltr"}
                 >
                   {getLocalizedName(teacher)}
                 </h3>
                 <p
                   className="mb-2 text-sm font-semibold text-blue-600"
-                  dir={isBangla ? "rtl" : "ltr"}
+                  dir={isBangla ? "ltr" : "ltr"}
                 >
                   {getLocalizedPosition(teacher)}
                 </p>
                 <p
                   className="line-clamp-2 text-sm text-gray-600"
-                  dir={isBangla ? "rtl" : "ltr"}
+                  dir={isBangla ? "ltr" : "ltr"}
                 >
                   {getLocalizedDegree(teacher)}
                 </p>
@@ -210,19 +210,19 @@ const TeachersPage = () => {
                 <div className="flex-1">
                   <h2
                     className="mb-2 text-2xl font-bold text-gray-800"
-                    dir={isBangla ? "rtl" : "ltr"}
+                    dir={isBangla ? "ltr" : "ltr"}
                   >
                     {getLocalizedName(selectedTeacher)}
                   </h2>
                   <p
                     className="mb-1 text-lg font-semibold text-blue-600"
-                    dir={isBangla ? "rtl" : "ltr"}
+                    dir={isBangla ? "ltr" : "ltr"}
                   >
                     {getLocalizedPosition(selectedTeacher)}
                   </p>
                   <p
                     className="mb-4 text-sm text-gray-600"
-                    dir={isBangla ? "rtl" : "ltr"}
+                    dir={isBangla ? "ltr" : "ltr"}
                   >
                     {getLocalizedDegree(selectedTeacher)}
                   </p>
@@ -235,7 +235,7 @@ const TeachersPage = () => {
                       </h3>
                       <p
                         className="leading-relaxed text-gray-600"
-                        dir={isBangla ? "rtl" : "ltr"}
+                        dir={isBangla ? "ltr" : "ltr"}
                       >
                         {getLocalizedBio(selectedTeacher)}
                       </p>

@@ -3,7 +3,7 @@
 import { Separator } from "../ui/separator";
 import { Icons } from "@/components/icons";
 import { useTranslation } from "react-i18next";
-import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
+import { MapPin, Phone, MessageCircle } from "lucide-react";
 import { Button } from "../ui/button";
 
 export function SiteFooter() {
@@ -23,7 +23,7 @@ export function SiteFooter() {
             <div className="mb-4 flex items-center gap-2">
               <Icons.logo className="h-8 w-8 text-primary" />
               <h3 className="text-xl font-bold text-gray-800">
-                An Nur Jame Masjid
+                An Noor Jame Masjid
               </h3>
             </div>
             <p className="mb-2 text-sm text-gray-600">আন-নূর জামে মসজিদ</p>
@@ -118,7 +118,7 @@ export function SiteFooter() {
         {/* Bottom Bar */}
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm text-gray-500 md:text-left">
-            © {new Date().getFullYear()} An Nur Masjid.
+            © {new Date().getFullYear()} An Noor Masjid.
             {isBangla ? " সর্বস্বত্ব সংরক্ষিত।" : " All rights reserved."}
           </p>
         </div>

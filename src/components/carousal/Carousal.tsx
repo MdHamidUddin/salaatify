@@ -12,8 +12,19 @@ const images = [
     captionBn: "আন-নূর জামে মসজিদ",
   },
   {
-    src: "/cover/2.jpeg",
-    caption: "Intricate Islamic calligraphy, a timeless art form.",
+    src: "/cover/masjid-night-1.jpeg",
+    caption: "An-Nur Jame Masjid",
+    captionBn: "আন-নূর জামে মসজিদ",
+  },
+  {
+    src: "/cover/masjid-night-2.jpeg",
+    caption: "An-Nur Jame Masjid",
+    captionBn: "আন-নূর জামে মসজিদ",
+  },
+  {
+    src: "/cover/madrasa.jpeg",
+    caption: "Madrasa Building",
+    captionBn: "মাদ্রাসা বিল্ডিং",
   },
   // {
   //   src: "/cover/3.jpeg",

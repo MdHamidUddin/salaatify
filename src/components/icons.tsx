@@ -359,4 +359,33 @@ c45 91 128 147 310 208 83 27 103 25 239 -30 156 -62 220 -120 252 -229 14
       <path d="M21 12a9 9 0 1 1-6.219-8.56" />
     </svg>
   ),
+  bkash: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+        fill="#E2136E"
+      />
+      <text x="12" y="16" fontSize="10" textAnchor="middle" fill="white">
+        bKash
+      </text>
+    </svg>
+  ),
+  nagad: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
+      <path
+        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"
+        fill="#F26522"
+      />
+      <text x="12" y="16" fontSize="10" textAnchor="middle" fill="white">
+        Nagad
+      </text>
+    </svg>
+  ),
+  bank: (props: IconProps) => (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" {...props}>
+      <rect x="4" y="10" width="16" height="12" strokeWidth="2" />
+      <path d="M12 2L4 10h16L12 2z" strokeWidth="2" />
+      <path d="M8 14h8M8 18h4" strokeWidth="2" />
+    </svg>
+  ),
 };

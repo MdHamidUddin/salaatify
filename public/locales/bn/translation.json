@@ -17,7 +17,8 @@
     "teachers": "আমাদের শিক্ষক",
     "videos": "ভিডিও",
     "settings": "ভাষা",
-    "theme": "থিম"
+    "theme": "থিম",
+    "donation": "দান"
   },
   "prayerNames": {
     "fajr": "ফজর",
@@ -91,7 +92,7 @@
   "Name": "নাম",
   "English": "ইংরেজি",
   "Meaning": "অর্থ",
-  "Our Team": "আমাদের টিম",
+  "Our Team": "আমাদের কমিটি সদস্যরা",
   "Loading team members...": "টিম সদস্যদের তথ্য লোড হচ্ছে...",
   "Our Courses": "আমাদের কোর্সসমূহ",
   "Our Teachers": "আমাদের শিক্ষকবৃন্দ"

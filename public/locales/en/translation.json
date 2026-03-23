@@ -18,7 +18,8 @@
     "teachers": "Our Teachers",
     "videos": "Videos",
     "settings": "Language",
-    "theme": "Theme"
+    "theme": "Theme",
+    "donation": "Donation"
   },
   "prayerNames": {
     "fajr": "Fajr",
@@ -92,7 +93,7 @@
   "Name": "Name",
   "English": "English",
   "Meaning": "Meaning",
-  "Our Team": "Our Team",
+  "Our Team": "Our Committee Members",
   "Loading team members...": "Loading team members...",
   "Our Courses": "Our Courses",
   "Our Teachers": "Our Teachers"

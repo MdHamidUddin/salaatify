@@ -15,6 +15,7 @@ import {
   Video,
   Compass,
   MessageCircle,
+  DollarSign,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -63,6 +64,11 @@ export function MobileNav() {
       translationKey: "navigation.videos",
       icon: <Video className="h-5 w-5" />,
     },
+    {
+      href: "/donation",
+      translationKey: "navigation.donation",
+      icon: <DollarSign className="h-5 w-5" />,
+    },
   ];
 
   const isActive = (href: string) => {
@@ -89,7 +95,7 @@ export function MobileNav() {
               <div className="flex items-center gap-2">
                 <Icons.logo className="h-8 w-8 text-primary" />
                 <span className="text-lg font-bold text-gray-900">
-                  An Nur Masjid
+                  An Noor Masjid
                 </span>
               </div>
               {/* <Button

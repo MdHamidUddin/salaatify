@@ -278,10 +278,10 @@ export default function PrayersSection({
 
         {/* Map */}
         <PrayerMap
-          latitude={location.latitude}
-          longitude={location.longitude}
-          locationName={location.city || "Current Location"}
-          zoom={13}
+          latitude={24.75590214212132}
+          longitude={88.25067170282985}
+          locationName="Islamic Foundation Masjid"
+          zoom={15}
         />
       </section>
     </Suspense>
