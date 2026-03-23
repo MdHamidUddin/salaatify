@@ -8,17 +8,17 @@ import { ChevronLeft, ChevronRight } from "lucide-react"; // Using lucide-react 
 const images = [
   {
     src: "/cover/masjid.jpeg",
-    caption: "An-Nur Jame Masjid",
+    caption: "Noor Jame Masjid",
     captionBn: "আন-নূর জামে মসজিদ",
   },
   {
     src: "/cover/masjid-night-1.jpeg",
-    caption: "An-Nur Jame Masjid",
+    caption: "Noor Jame Masjid",
     captionBn: "আন-নূর জামে মসজিদ",
   },
   {
     src: "/cover/masjid-night-2.jpeg",
-    caption: "An-Nur Jame Masjid",
+    caption: "Noor Jame Masjid",
     captionBn: "আন-নূর জামে মসজিদ",
   },
   {

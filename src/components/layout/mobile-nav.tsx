@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
+import Image from "next/image";
 import { useTranslation } from "react-i18next";
 import {
   Menu,
@@ -93,10 +93,14 @@ export function MobileNav() {
           <div className="border-b border-gray-100 px-6 py-5">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Icons.logo className="h-8 w-8 text-primary" />
-                <span className="text-lg font-bold text-gray-900">
-                  An Noor Masjid
-                </span>
+                <Image
+                  src="/logo.jpg"
+                  alt="Noor Logo"
+                  width={32}
+                  height={32}
+                  className="h-8 w-8"
+                />
+                <span className="text-lg font-bold text-gray-900">Noor</span>
               </div>
               {/* <Button
                 variant="ghost"

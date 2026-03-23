@@ -4,10 +4,9 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Icons } from "@/components/icons";
 import { useTranslation } from "react-i18next";
 import { MobileNav } from "./mobile-nav";
-
+import Image from "next/image";
 interface NavItem {
   href: string;
   translationKey: string;
@@ -34,10 +33,15 @@ export function MainNav() {
       <div className="flex items-center">
         <MobileNav />
         <Link href="/" className="mr-6 flex items-center space-x-2">
-          <Icons.logo className="h-6 w-6" />
-          <span className="hidden font-bold sm:inline-block">
-            An Noor Masjid
-          </span>
+          {/* <Icons.logo className="h-6 w-6" /> */}
+          <Image
+            src="/logo.jpg"
+            alt="Noor Logo"
+            width={32}
+            height={32}
+            className="h-8 w-8"
+          />
+          <span className="hidden font-bold sm:inline-block">Noor</span>
         </Link>
         <nav className="hidden items-center space-x-6 text-sm font-medium md:flex">
           {navItems.map((item) => {

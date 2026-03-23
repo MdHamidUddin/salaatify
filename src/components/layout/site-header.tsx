@@ -6,7 +6,7 @@ import { useTheme } from "next-themes";
 import { useTranslation } from "react-i18next";
 import * as React from "react";
 import { Settings, Globe, Moon, Sun, Laptop } from "lucide-react";
-import { Icons } from "@/components/icons";
+import Image from "next/image";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -63,8 +63,14 @@ export function SiteHeader() {
       <div className="container flex h-14 items-center justify-between gap-2 md:hidden">
         <div>
           <Link href="/" className="mr-6 flex items-center space-x-2">
-            <Icons.logo className="h-6 w-6" />
-            <span className="font-bold sm:inline-block">An Noor Masjid</span>
+            <Image
+              src="/logo.jpg"
+              alt="Noor Logo"
+              width={32}
+              height={32}
+              className="h-8 w-8"
+            />
+            <span className="font-bold sm:inline-block">Noor</span>
           </Link>
         </div>
         <div className="flex gap-3">

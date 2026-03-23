@@ -118,7 +118,7 @@ export function SiteFooter() {
         {/* Bottom Bar */}
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <p className="text-center text-sm text-gray-500 md:text-left">
-            © {new Date().getFullYear()} An Noor Masjid.
+            © {new Date().getFullYear()} Noor.
             {isBangla ? " সর্বস্বত্ব সংরক্ষিত।" : " All rights reserved."}
           </p>
         </div>

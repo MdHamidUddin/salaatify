@@ -195,7 +195,7 @@ export const PrayerMap = ({
         {/* Address Info */}
         {(locationName ?? (latitude && longitude)) && (
           <div className="mt-3 rounded-lg bg-blue-50 p-3">
-            <p className="text-sm text-gray-700">
+            {/* <p className="text-sm text-gray-700">
               <span className="font-semibold">
                 {isBangla ? "ঠিকানা:" : "Address:"}
               </span>{" "}
@@ -203,10 +203,10 @@ export const PrayerMap = ({
               {latitude &&
                 longitude &&
                 ` (${latitude.toFixed(4)}°, ${longitude.toFixed(4)}°)`}
-            </p>
+            </p> */}
             <Button
               variant="link"
-              className="mt-2 h-auto p-0 text-sm text-blue-600"
+              className="mt-2 h-auto p-0 text-lg text-blue-600 "
               onClick={() => window.open(googleMapsDirectionsUrl, "_blank")}
             >
               {isBangla ? "দিকনির্দেশনা পান" : "Get Directions"} →
